@@ -10,14 +10,12 @@ Email::Simple::FromHandle - an Email::Simple but from a handle
 
 =head1 VERSION
 
-  $Id: /my/cs/projects/fromhandle/trunk/lib/Email/Simple/FromHandle.pm 22478 2006-06-13T12:51:46.331840Z rjbs  $
-
-version 0.050
+version 0.051
 
 =cut
 
 use vars qw($VERSION);
-$VERSION = '0.050';
+$VERSION = '0.051';
 
 =head1 SYNOPSIS
 
@@ -167,9 +165,12 @@ sub stream_to {
 #### Methods that override Email::Simple below
 
 sub new {
-    my ($class, $handle) = @_;
+    my ($class, $handle, $arg) = @_;
 
-    return Email::Simple->new($handle) unless ref $handle;
+    $arg ||= {};
+    $arg->{header_class} ||= $class->default_header_class;
+
+    return Email::Simple->new($handle, $arg) unless ref $handle;
 
     my ($head, $mycrlf) = $class->_split_head_from_body($handle);
 
@@ -180,7 +181,7 @@ sub new {
     }, $class;
 
     $self->header_obj_set(
-        Email::Simple::Header->new($head, { crlf => $self->crlf })
+        $arg->{header_class}->new($head, { crlf => $self->crlf })
     );
 
     return $self;
