@@ -15,4 +15,4 @@ no_index:
 requires:
   Email::Simple: 2.004
   IO::String: 0
-version: 0.051
+version: 0.052
