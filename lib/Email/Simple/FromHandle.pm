@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Email::Simple::FromHandle;
 {
-  $Email::Simple::FromHandle::VERSION = '0.053';
+  $Email::Simple::FromHandle::VERSION = '0.054';
 }
 use Email::Simple 2.004;
 use parent 'Email::Simple';
@@ -159,7 +159,7 @@ Email::Simple::FromHandle - an Email::Simple but from a handle
 
 =head1 VERSION
 
-version 0.053
+version 0.054
 
 =head1 SYNOPSIS
 
